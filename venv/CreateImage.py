@@ -8,9 +8,9 @@ def create(fileinput, fileoutput, size):
     imap = []
     with open(fileinput) as mapping:
         for line in mapping:
-            characters = line.split()
-            for char in characters:
-                imap.append(int(char))
+            for char in line:
+                if char != '\n':
+                    imap.append(int(char))
 
     print("File length: ", len(imap))
     print("Calculating Size...", end=" ")
