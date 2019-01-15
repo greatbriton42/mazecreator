@@ -42,13 +42,8 @@ class Maze:
                 else:
                     self.bottom[x] = 1
 
-    def createmiddle(self):
-        for y in range(0, self.size[1]-2):
-            for x in range(0, self.size[0]):
-                if x == 0 or x == self.size[0]-1:
-                    self.middle[y][x] = 1
-                else:
-                    self.middle[y][x] = random.randrange(2)
+    def createmiddle(self, algorithm, start, end):
+        self.middle = algorithm(self.size, start, end)
 
     def getmaze(self) -> [str]:
         maze = []
