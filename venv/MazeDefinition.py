@@ -2,48 +2,31 @@ import random
 
 
 class Maze:
-    def __init__(self, size: []):
+    def __init__(self, size: [], start, end):
         self.size = size
+        self.start = start
+        self.end = end
         self.top = [0 for i in range(self.size[0])]
         self.middle = [[0 for i in range(self.size[1])] for i in range(self.size[0])]
         self.bottom = [0 for i in range(self.size[0])]
 
-    def createtop(self, startposition):
-        # Choose a random start position
-        if startposition < 0:
-            pos = random.randrange(self.size[0])
-            for x in range(0, self.size[0]):
-                if x == pos:
-                    self.top[x] = 0
-                else:
-                    self.top[x] = 1
-        # Create start position at passed value
-        else:
-            for x in range(0, self.size[0]):
-                if x == startposition:
-                    self.top[x] = 0
-                else:
-                    self.top[x] = 1
+    def createtop(self):
+        for x in range(0, self.size[0]):
+            if x == self.start:
+                self.top[x] = 0
+            else:
+                self.top[x] = 1
 
-    def createbottom(self, endposition):
-        # Choose a random start position
-        if endposition < 0:
-            pos = random.randrange(self.size[0])
-            for x in range(0, self.size[0]):
-                if x == pos:
-                    self.bottom[x] = 0
-                else:
-                    self.bottom[x] = 1
+    def createbottom(self):
         # Create start position at passed value
-        else:
-            for x in range(0, self.size[0]):
-                if x == endposition:
-                    self.bottom[x] = 0
-                else:
-                    self.bottom[x] = 1
+        for x in range(0, self.size[0]):
+            if x == self.end:
+                self.bottom[x] = 0
+            else:
+                self.bottom[x] = 1
 
-    def createmiddle(self, algorithm, start, end):
-        self.middle = algorithm(self.size, start, end)
+    def createmiddle(self, algorithm):
+        self.middle = algorithm(self.size, self.start, self.end)
 
     def getmaze(self) -> [str]:
         maze = []
