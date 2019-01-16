@@ -8,7 +8,7 @@ def create(size, start, end):
                 middle[y][x] = 1
             elif x == start and y == 0:
                 middle[y][x] = 0
-            if y == size[1]-3 and x == end:
+            elif y == size[1]-3 and x == end:
                 middle[y][x] = 0
             else:
                 middle[y][x] = random.randrange(2)
