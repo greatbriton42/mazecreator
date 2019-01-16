@@ -23,6 +23,7 @@ def create(size, start, end):
         else:
             left = False
 
+        #Follow the new path
         if right:
             markedX = markedX + 1
         elif bottom:
