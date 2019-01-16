@@ -1,15 +1,20 @@
 from MazeDefinition import Maze
 import argparse
-from MazeFactory import mazefactory
+import random
+from MazeFactory import MazeFactory
 
 
 def createmaze(factory, algorithm, size: [], startpos, endpos, filepath):
-    m = Maze(size)
-    m.createtop(startpos)
+    if startpos < 0:
+        startpos = random.randrange(1, size[0]-1)
+    if endpos < 0:
+        endpos = random.randrange(1, size[0]-1)
+    m = Maze(size, startpos, endpos)
+    m.createtop()
     [description, creator] = factory.importmaze(algorithm)
     print(description)
-    m.createmiddle(creator, startpos, endpos)
-    m.createbottom(endpos)
+    m.createmiddle(creator)
+    m.createbottom()
     printtofile(filepath, m)
 
 def printtofile(filepath, maze):
@@ -17,7 +22,7 @@ def printtofile(filepath, maze):
     file.writelines(maze.getmaze())
 
 def main():
-    mf = mazefactory()
+    mf = MazeFactory()
     parser = argparse.ArgumentParser()
     parser.add_argument("fileoutput")
     parser.add_argument("width", type=int)
